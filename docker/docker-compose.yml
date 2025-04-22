@@ -1,0 +1,45 @@
+version: '3.9'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_psicologos
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - psicologos_net
+
+  backend:
+    build: ../backend
+    container_name: backend_psicologos
+    restart: always
+    depends_on:
+      - mysql
+    environment:
+      DATABASE_URL: mysql://root:123456789@mysql:3306/psicologos_db
+    ports:
+      - "3001:3001"
+    networks:
+      - psicologos_net
+
+  frontend:
+    build: ../frontend
+    container_name: frontend_psicologos
+    restart: always
+    ports:
+      - "3000:3000"
+    networks:
+      - psicologos_net
+
+volumes:
+  mysql_data:
+
+networks:
+  psicologos_net:
+    driver: bridge

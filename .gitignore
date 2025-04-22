@@ -1,0 +1,45 @@
+# Arquivos de ambiente
+.env
+.env.local
+.env.development
+.env.development.local
+.env.test
+.env.test.local
+.env.production
+.env.production.local
+
+# Logs
+*.log
+logs/
+
+# Dependências
+node_modules/
+**/node_modules/
+
+# Build
+dist/
+build/
+**/dist/
+**/build/
+
+# Dados do Docker
+docker/mysql_data/
+docker/postgres_data/
+
+# Arquivos do sistema e IDEs
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Outros arquivos temporários
+*.pid
+*.seed
+*.pid.lock
+*.sublime-workspace
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.tmp
+*.temp

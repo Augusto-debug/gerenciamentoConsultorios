@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL") 
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  name      String
+  email     String    @unique
+  password  String
+  createdAt DateTime  @default(now())
+
+  patients  Patient[]
+  sessions  Session[]
+  incomes   Income[]
+  expenses  Expense[]
+}
+
+model Patient {
+  id        Int       @id @default(autoincrement())
+  name      String
+  email     String?
+  phone     String?
+  notes     String?
+  createdAt DateTime  @default(now())
+
+  userId    Int
+  user      User      @relation(fields: [userId], references: [id])
+  sessions  Session[]
+}
+
+model Session {
+  id         Int       @id @default(autoincrement())
+  date       DateTime
+  duration   Int       // em minutos
+  notes      String?
+
+  patientId  Int
+  patient    Patient   @relation(fields: [patientId], references: [id])
+
+  userId     Int
+  user       User      @relation(fields: [userId], references: [id])
+}
+
+model Income {
+  id        Int      @id @default(autoincrement())
+  amount    Float
+  source    String   
+  date      DateTime @default(now())
+
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Expense {
+  id        Int      @id @default(autoincrement())
+  amount    Float
+  category  String   
+  date      DateTime @default(now())
+
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+}
