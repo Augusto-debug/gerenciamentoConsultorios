@@ -44,7 +44,7 @@ Este projeto é ideal para:
 - 💰 Controle financeiro (receitas e despesas)
 - 📊 Dashboard com indicadores úteis
 - 🔐 Autenticação de usuários (JWT)
-- 📱 Interface responsiva (desktop e mobile)
+- 📱 Interface responsiva (desktop e mobile(ainda por fazer))
 
 ---
 
